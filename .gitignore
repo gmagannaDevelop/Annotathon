@@ -1,3 +1,17 @@
+
+# Documents provided by the university,
+# which are not my work and I don't know if
+# I'm allowed to redistribute
+Docs
+Docs/*.pdf
+
+# Web interface, javascript utilities to find
+# ORF. I don't know the license used so better 
+# keep it private. This is however publicly avaliable
+# on the author's website for only use and download.
+sms2
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
