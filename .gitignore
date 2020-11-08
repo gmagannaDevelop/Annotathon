@@ -11,6 +11,12 @@ Docs/*.pdf
 # on the author's website for only use and download.
 sms2
 
+# For the moment, no data will be shared. 
+# After the evaluation of the project, this may change
+data
+
+# Credentials used to interact with NCBI's web interface
+creds
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
