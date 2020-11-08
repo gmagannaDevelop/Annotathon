@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "annotathon"
+version = "0.1.0"
+description = "Tools and Workflows for The Annotathon Project"
+authors = ["Gustavo Magaña López <gustavo.magana-lopez@u-psud.fr>"]
+license = "EFL-2.0"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+pandas = "^1.1.2"
+biopython = "^1.78"
+entrezpy = "^2.0.5"
+ete3 = "^3.1.2"
+sacred = "^0.8.1"
+toml = "^0.10.2"
+
+[tool.poetry.dev-dependencies]
+ipython = "^7.18.1"
+jupyter = "^1.0.0"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
