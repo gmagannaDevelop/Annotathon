@@ -6,19 +6,7 @@ from pathlib import (
 import os
 
 
-class WindowsPath(_WindowsPath_, Path):
-    """ Helper for EZPath """
-
-    pass
-
-
-class PosixPath(_PosixPath_, Path):
-    """ Helper for EZPath """
-
-    pass
-
-
-class EZPath(_Path_):
+class Path(_Path_):
     """
     Basically a wrapper for pathlib.Path,
     created to modify pathlib.Path.glob's behaviour :
@@ -38,6 +26,18 @@ class EZPath(_Path_):
 
     def lglob(self, expr: str):
         return list(super().glob(expr))
+
+
+class WindowsPath(_WindowsPath_, Path):
+    """ Helper for EZPath """
+
+    pass
+
+
+class PosixPath(_PosixPath_, Path):
+    """ Helper for EZPath """
+
+    pass
 
 
 class objdict(dict):
