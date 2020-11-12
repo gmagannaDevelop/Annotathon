@@ -27,3 +27,7 @@ This is just the first problem. We believe that the process of annotating new se
 __This document, and most of the project will be documented in a bilingually, both in French and in English (mainly). French because it is the language of our academic community. However, English is the _de facto lingua franca_ of science. Documenting the repository in English will broaden its international reach within the bioinformatics community.__
 
 
+## Extra :
+Take a look into the `misc` directory. There you will find various documents like a manually created changelog and a todo list.
+Some caveats and checksums are also provided.
+
