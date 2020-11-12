@@ -1,4 +1,8 @@
 
+# Notebook used to extract part of the methodology :
+workflow/biopython-coronavirus-notebook.ipynb
+
+
 # Documents provided by the university,
 # which are not my work and I don't know if
 # I'm allowed to redistribute
@@ -14,6 +18,9 @@ sms2
 # For the moment, no data will be shared. 
 # After the evaluation of the project, this may change
 data
+*.fa
+*.fasta
+*.xml
 
 # Credentials used to interact with NCBI's web interface
 creds
