@@ -1,4 +1,8 @@
 
+# EMBL-EBI webservices :
+# https://github.com/ebi-wp/webservice-clients
+webservice-clients
+
 # Notebook used to extract part of the methodology :
 workflow/biopython-coronavirus-notebook.ipynb
 
