@@ -17,6 +17,8 @@ matplotlib = "^3.3.2"
 ipywidgets = "^7.5.1"
 xmltramp2 = "^3.1.1"
 requests = "^2.25.0"
+pandas-read-xml = "^0.0.8"
+xmltodict = "^0.12.0"
 
 [tool.poetry.dev-dependencies]
 ipython = "^7.18.1"
