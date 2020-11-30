@@ -27,6 +27,10 @@ class Path(_Path_):
     def lglob(self, expr: str):
         return list(super().glob(expr))
 
+    @property
+    def abs(self):
+        return super().absolute().as_posix()
+
 
 class WindowsPath(_WindowsPath_, Path):
     """ Helper for EZPath """
@@ -57,6 +61,18 @@ class objdict(dict):
     Original code snippet found here :
     https://goodcode.io/articles/python-dict-object/
     """
+
+    @property
+    def lkeys(self):
+        return super().keys()
+
+    @property
+    def lvalues(self):
+        return super().values()
+
+    @property
+    def litems(self):
+        return super().items()
 
     def __getattr__(self, name):
         if name in self:
