@@ -1,0 +1,48 @@
+#
+#       This file was edited by hand to eliminate
+#       "magic strings". In addition to this, Rscript
+#       won't find RStudio's pandoc installation 
+#       which makes rendering the site impossible.
+#       Feel free to tweak it to best suit your needs.
+#
+
+# Input/Output locations
+#[directories]
+#source="src/"
+#dest="build/"
+
+# Knit Options
+#[options]
+#output="html_document"
+#verbose=false
+
+# Random
+[random]
+seed=204
+
+# Help Rscript find python
+[python]
+env="/home/gml/.cache/pypoetry/virtualenvs/annotathon-cID333B3-py3.8/"
+binary="/home/gml/.cache/pypoetry/virtualenvs/annotathon-cID333B3-py3.8/bin/python"
+
+# Data locations
+[locations]
+root="/home/gml/Documents/Master/M1_BIBS/Anal_Seq/Annotathon"
+r="/home/gml/Documents/Master/M1_BIBS/Anal_Seq/Annotathon/R"
+pypkg="/home/gml/Documents/Master/M1_BIBS/Anal_Seq/Annotathon/annotathon"
+assets="/home/gml/Documents/Master/M1_BIBS/Anal_Seq/Annotathon/assets"
+data="/home/gml/Documents/Master/M1_BIBS/Anal_Seq/Annotathon/data"
+
+[data]
+root="/home/gml/Documents/Master/M1_BIBS/Anal_Seq/Annotathon/data"
+dpinterpro="/home/gml/Documents/Master/M1_BIBS/Anal_Seq/Annotathon/data/domaines-proteiques-interpro"  
+first="/home/gml/Documents/Master/M1_BIBS/Anal_Seq/Annotathon/data/first"  
+homologues="/home/gml/Documents/Master/M1_BIBS/Anal_Seq/Annotathon/data/homologues-par-blast"  
+nr5k="/home/gml/Documents/Master/M1_BIBS/Anal_Seq/Annotathon/data/homologues-par-blast/5k-nr"  
+nrdefault="/home/gml/Documents/Master/M1_BIBS/Anal_Seq/Annotathon/data/homologues-par-blast/default-nr"  
+landmark="/home/gml/Documents/Master/M1_BIBS/Anal_Seq/Annotathon/data/landmark" 
+legacy="/home/gml/Documents/Master/M1_BIBS/Anal_Seq/Annotathon/data/legacy" 
+sequences="/home/gml/Documents/Master/M1_BIBS/Anal_Seq/Annotathon/data/sequences" 
+taxo="/home/gml/Documents/Master/M1_BIBS/Anal_Seq/Annotathon/data/multiple-alignment"
+
+

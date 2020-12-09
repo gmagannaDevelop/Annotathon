@@ -1,0 +1,57 @@
+---
+title: "Alignement multiple"
+author: "Gustavo Magaña López & Anthony Boutard"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Aidez-moi svp
+
+
+```{r libraries}
+library(msa) # Paquet pour alignements multiples
+library(aphid) # Paquet contenant les matrices de substitution
+library(ggplot2) # Paquet pour la création de graphiques
+library(foreach) # Paquet pour itérations
+data("substitution") # Substitution matrices
+source("mAlignToolkit.R")
+library(ape)
+library(aphid)
+library(phangorn)
+```
+
+```{r import.config}
+config <- RcppTOML::parseToml("../config.toml")
+cat("Original sequences : ")
+list.files(config$data$sequences)
+cat("Homologues (dirs): ")
+list.files(config$data$homologues)
+cat("nr, default :")
+list.files(config$data$nrdefault)
+cat("nr, 5k : ")
+list.files(config$data$nr5k)
+cat("taxo, 43 : ")
+list.files(config$data$taxo)
+```
+
+```{r file.input}
+orf1 <- Biostrings::readAAStringSet(glue::glue("{config$data$sequences}/orf1_p.fasta"))
+nr.default <- Biostrings::readAAStringSet(glue::glue("{config$data$nrdefault}/complete-seqs.fasta"))
+taxo.fasta <- Biostrings::readAAStringSet(glue::glue("{config$data$taxo}/the-seqs.fasta"))
+```
+
+
+```{r search, cache=TRUE}
+w.search..default.pam150 <- linear.search(
+  taxo.fasta, subm=substitution$PAM150, 
+  gapval=0, # How to penalise for gaps when computing the score.
+  go = seq(5, 15, 1), # interval for gap Opening penalties
+  ge = seq(0.1, 1.5, 0.1) # ibidem for gap extension
+)
+```

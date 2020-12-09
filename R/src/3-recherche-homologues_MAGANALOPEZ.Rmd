@@ -1,0 +1,323 @@
+---
+title: "Recherche d'homologues"
+author: "Gustavo Magaña López"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r notice}
+
+# Ce fichier a été créé en utilisant R Markdown, et paquets de BioConductor.
+# Écrit en RStudio, sur le système d'exploitation Pop!_0S 20.10. 
+# https://github.com/gmagannaDevelop/BioGenesis/tree/structurale
+```
+
+
+
+## UniProt-NCBI
+
+__1.1__ Dans quelle partie de la banque se trouve cette fiche ?
+
+Elle se trouve dans trEMBL. Ceci veut dire qu'il ne s'agit pas d'une entrée examinée et validée par des contribueurs de Swiss-Prot. Ce correspond à une entrée seulement traitée par le système. 
+
+__1.2__ À quelle protéine correspond-elle ? De quel organisme ?
+
+Sur le site UniProt, la protéine n'est référencée que par son rôle de régulateur transcriptionnel. L'organisme d'origine de la protéine est le _Streptococcus thermophilus_. Lors de l'exercice précédent nous avions déjà trouvé des homologues __ComR__ chez les _streptococci_. Sur PDBe nous la trouvons directement comme __ComR__.
+
+__1.3__ Quelle est la longueur de sa séquence ? Combien de structures 3D de la protéine ont été résolues ?
+
+La longueur de sa séquence est de 310 aa. Nous observons trois structures différentes, notamment :
+
+* 5JUB, dont on connaît la composition dès l'exercice de la deuxième séance: Chaînes A et B de la forme dimérique __ComR__, avec les chaînes C et D (peptides signaux __ComS__), dg l'ADN associé.
+* 5JUF, qui est l'apoprotéine (forme inactive) de la __ComR__.
+* 5QER, une autre forme apo de la protéine.
+
+__1.4__ Combien de domaines  sont identifiés par InterPro ? Donnez-en les bornes (résidus X à Y).
+
+InterPro identifie quatre domaines dans la protéine __ComR__.
+Ce sont :
+
+* Cro-C1-type helix-turn-helix domain (résidus G8 à L66)
+* Lambda repressor-like, DNA-binding domain superfamily (résidus N2 à A296)
+* Tetratricopeptide-like helical domain superfamily (résidus L3 à A296)
+* ComR, tetratricopeptide (résidus P75 à A292)
+
+__1.5.__ Pendant une recherche BLAST, quel est le paramétrage par défaut de BLASTP ?
+
+| General parameters  |   | Scoring Parameters   | |  Filters and masking  |
+|----------|----------|-----------|--------------|------------|--------|
+| max. target sequences | 100 | matrix    | BLOSUM62  | low complexity regions | false
+| short queries  |    true    | gap costs | existence=11, extension=1 | mask for lookup table only | false 
+| expect threshold |  0.05    | compositional adj. | conditional comp. score matrix. ajd. | mask lower case letters | false
+| word size |               6 |
+
+__1.6__ Combien obtenez vous de hits ? Quelles sont leurs taxonomies ?
+
+Sur la page principale de BLAST, on peut voir 100 résultats, ce qui est le nombre affiché par défaut. En cliquant sur fiche Taxonomy, nous confirmons qu'il y a eu 258 hits, comprennant 67 organismes. La majorité appartiennent au clade des streptococci.
+
+![Taxonomie](figures/taxonomie.png)
+
+__1.7__ Pour savoir s'il existe des homologues dans des espèces plus eloignées, relancer une recherche BLASTP contre la partie annotée UniProt/SwissProt. Combien de hits obtient-onm toujour avec le paramétrage par défaut ?
+
+On n'obtient aucun hit sur la partie UniProt/SwissProt. Ceci peut-être attribué a un manque d'annotation pour des espèces plus eloignées ou tout simplement un manque d'homologie.
+
+__1.8__ Quels sont les paramètres par défaut de DELTA-BLAST ?
+
+| General parameters  |   | Scoring Parameters   | |  Filters and masking  | | PSI/PHI/DELTA BLAST |
+|----------|----------|-----------|--------------|------------|------------|-------------|---------|
+| max. target sequences | 500 | matrix    | BLOSUM62  | low complexity regions | false | PSI threshold | 0.005 |
+| short queries  |    true    | gap costs | existence=11, extension=1 | mask for lookup table only | false | DELTA threshold | 0.05
+| expect threshold |  0.05    | compos. adj. | composition-based statistics. | mask lower case letters | false | pseudocount | 0 |
+| word size |               3 |
+| max matches in query range | 0 |
+
+__1.9__ Combien de hits trouve-t-on cette fois ?
+
+DELTA-BLAST montre en tout 248 hits, correspondants à 205 séquences sélectionnées parmi 181 organismes.
+
+__1.9.1__ Quel est le domaine le plus conservé ? (cf. Graphic Summary)
+
+Le domaine le plus conservé est pfam18710
+appartenant à la superfamille des tetratricopeptides ComR (cl40026).
+
+Enfin, pour savoir s’il existe des homologues structuraux, relancez une recherche par DELTA-BLAST contre la banque de structures (Protein Data Bank).
+Sélectionnez les hits avec un recouvrement supérieur à 70% de la séquence requête (sans prendre plusieurs fois la séquence de la même protéine issue de plusieurs structures 3D) et téléchargez leur séquence complète.
+
+__1.9.2__ Combien de séquences obtenez-vous ?
+
+En filtrant les résultats, il n'y restent que sept séquences, provenant des organismes suivants:
+
+* _Streptococcus thermophilus LMD-9_
+* _Streptococcus vestibularis F0396_
+* _Streptococcus suis 05ZYH33_
+* _Streptococcus thermophilus LMG 18311_
+* _Streptococcus dysgalactiae_
+* _Bacillus thuringiensis serovar israelensis ATCC35646_
+* _Enterococcus faecalis_
+
+## ClustalW (prabi)
+
+![Alignement Multiple : ClustalW](figures/clustalw1.png)
+
+__2.1__ Entrez-ces séquences dans ClustalW pour réaliser un alignement multiple (paramétrage par défaut). Les séquences ont-elles la même longueur ?
+
+Deux possèdent une longueur de 284 résidus : 7JI0_B et 5W4N_A. Ce qui est aussi le cas de 5JUB_A et 6HU8_A avec une taille de 310 résidus. Les autres n'ont pas la même longueur, toutefois elles ne s'eloignent pas trop.
+
+__2.2__ Quelles sont les statistiques de cet alignement multiple ?
+
+Le pourcentage d'identité est faible, de 1.15 % (4 résidus). Après le
+pourcentage de forte similarité est de 4.87 % (17 résidus). Finalement celui de faible similarité est de 4.30 % (15
+résidus). Sur la longueur de 349 résidus, le pourcentage de différence est de le plus grand avec 89.68 % (313 résidus).
+
+__2.3__ Un des domaines est-il mieux conservé que l’autre ?
+
+En observant le côté N-terminal où se trouvent positions les plus significativement conservées, il semble que le domaine
+"Helix-turn-helix XRE-family like proteins", 
+dont l'intervalle se situe entre les résidus 8 et 66 de la séquence initiale soit le plus conservé entre les séquences. Cette portion est celle où se retrouvent la plupart alignements égaux ou de forte ressemblance.
+
+__2.4__ Cet alignement suggère-t-il que vous avez bien sélectionné des membres d’une même famille ?
+
+En étant le pourcentage de différence le plus grand parmi les statistiques,
+nous observons une très faible relation entre ces sept séquences, ce qui ne peut prouver l'homologie entre les espèces sélectionnées. Ce résultat est en accord avec ce que nous avons discuté en cours : Seule une minorité d’homologues présentant une identité de séquences > 25% est identifiable par comparaison de séquences.
+
+## ESPript
+
+__3.1__ Superposez les éléments de structure secondaire à cet alignement multiple grâce au lien sur le logiciel ESPript. Commentez le résultat et joignez le PDF à votre devoir.
+
+Les structures secondaires affichées par ESPript mettent mieux en évidence la similarité entre les séquences que seul l'alignement multiple de ClustalW. La page d'accueil d'ESPript nous donne aussi la possibilité de changer des paramètres. Nous pouvons choisir de mettre en évidence les similarités en fonctions des pourcentages suivants : Equivalent (Équivalence), MultiAlin (Alinement Multiple), Strict (identité), 	Risler (?), 	PAM250 (d'après la matrice de substitutions),  	BLOSUM62 (idem). Il est également possible de jouer sur le seuil imposé pour l'affichage (Global score).
+
+
+__3.2__ L’alignement obtenu avec le paramétrage par défaut de ClustalW vous parait-il améliorable ? Si oui, plus particulièrement dans quelle région de la séquence ? Argumentez. Sur quels paramètres de ClustalW pourriez-vous jouer ?
+
+L'alignement obtenu avec le paramétrage par défaut me parait améliorable d'abord sous l'argument que, a priori, celui-ci n'a aucune raison pour obtenir l'alignement optimal pour un ensemble de séquences quelconque. En plus, le pourcentage de différence n'est pas seulement le plus grand, il fait presque neuf fois la somme des autres (similarité et identité). On pourrait jouer surtout sur les paramètres de pénalité pour l'ouverture et extension de gaps. En plus, changer de matrice de substitution pourrait aussi améliorer les résultats. Les hypothèses sous-jacentes diffèrent et aussi leurs valeurs ce qui donne des alignements différents avec les mêmes paramètres de pénalité d'ouverture et extension des gaps.  
+
+## Question bonus
+
+__4.1__ Essayez, en modifiant le paramétrage de ClustalW, d’obtenir un alignement plus satisfaisant. Si vous y arrivez, joignez à votre devoir le nouveau résultat d’ESPript correspondant
+
+Pour ce faire, nous pourrions passer des heures sur le site en changeant les paramètres pour observer les variations sur les statistiques de l'alignement. Cependant, il y a d'autres possibilités. Pour faire cette partie de l'analyse, on s'appuie sur le logiciel R, notamment sur quelques paquets développés au sein du projet [BioConductor](https://www.bioconductor.org/).
+
+```{r imports, message=FALSE, warning=FALSE, tidy=TRUE}
+library(msa) # Paquet pour alignements multiples
+library(aphid) # Paquet contenant les matrices de substitution
+library(ggplot2) # Paquet pour la création de graphiques
+library(foreach) # Paquet pour itérations
+data("substitution") # Substitution matrices
+```
+
+Nous importons d'abord les séquences afin de réaliser l'alignement multiple localement :
+
+```{r import.data, message=FALSE, warning=FALSE, tidy=TRUE}
+filepath <- "../data/struct/seqComRDelta-Blast.fasta"
+mySeqs <- Biostrings::readAAStringSet(filepath, format = "fasta")
+```
+
+Ici nous pouvons voir quelques-unes des matrices de substitution d'acides aminés disponibles dans le paquet `aphid`. 
+Ce sont des matrices de substitution 
+[publiées par le NCBI](ftp://ftp.ncbi.nih.gov/blast/matrices/).
+```{r subs, message=FALSE, warning=FALSE}
+head(t(matrix(names(substitution), ncol=7, byrow=T)), 6)[2:6,1:6]
+```
+En poursuivant l'hypothèse introduite dans la réponse à la question 3.2, nous allons surtout jouer sur les paramètres de pénalité pour les gaps. Nous explorerons donc l'espace bidimensionnel des combinaisons de penalités pour l'ouverture et extension des gaps. Le bloc suivant montre les fonctions définies pour exécuter une recherche exhaustive de l'espace de paramètres (ce que l'on appelle GridSearch en anglais). 
+
+```{r function.def, message=FALSE, warning=FALSE, tidy=TRUE}
+f.algin.score <- function(
+  seqs, go="default", ge="default", subm, gapval=0
+){ 
+  # Compute score
+  sum(
+    # Compute conservation matrix
+    msaConservationScore(
+      # compute alignment using ClustalW
+      msaClustalW(
+        seqs, substitutionMatrix = subm, 
+        gapOpening = go, gapExtension = ge,
+        verbose = FALSE
+      ), 
+      substitutionMatrix = subm, gapVsGap = gapval
+    )
+  )
+}
+
+linear.search <- function(
+  seqs, subm, 
+  gapval=0, # How to penalise for gaps when computing the score.
+  go = seq(5, 15, 1), # interval for gap Opening penalties
+  ge = seq(0.1, 1.5, 0.05) # ibidem for gap extension
+){
+  retval <- foreach(g_op = go, .combine = rbind) %do% {
+    foreach(g_ext = ge, .combine = rbind) %do% {
+      it.algn.score <- f.algin.score(seqs, g_op, g_ext, subm, gapval)
+      data.frame(gop = g_op, gext = g_ext, score = it.algn.score)
+    }
+  }
+  return(retval)
+}
+
+lin.max <- function(x){ x[x$score == max(x$score), ] }
+lin.min <- function(x){ x[x$score == min(x$score), ] }
+
+plot.align.search <- function(the.table, ttl="GridSearch"){
+  gap.Open <- factor(the.table$gop)
+  gap.Ext <- factor(the.table$gext)
+  algn.score <- factor(the.table$score)
+  qplot(x = gap.Open, y = gap.Ext, fill = algn.score, geom = 'tile', main = ttl)
+}
+```
+
+Nous allons donc faire l'analyse pour les matrices PAM, BLOSSUM et ID. On n'explore pas la matrice GONNET car elle cause un erreur d'exécution (cette version n'a pas d'entré pour Z, donc les fonctions du paquet `msa` ne l'acceptent pas).
+
+```{r lin.grid.search, message=FALSE, warning=FALSE, tidy=TRUE, cache=TRUE, results="hide"}
+my.pam <- linear.search(mySeqs, substitution$PAM150, 0)
+my.blos <- linear.search(mySeqs, substitution$BLOSUM60, 0)
+my.id <- linear.search(seqs = mySeqs, subm = substitution$IDENTITY, gapval = 0)
+```
+
+
+## Blossum 
+```{r blossum}
+plot.align.search(my.blos, "BLOSSUM GridSeach")
+lin.max(my.blos)
+```
+
+
+## PAM
+```{r pam}
+plot.align.search(my.pam, "PAM GridSearch")
+lin.max(my.pam)
+```
+\newpage
+
+## ID
+```{r id}
+plot.align.search(my.id, "ID GridSearch")
+head(lin.max(my.id))
+```
+
+Les résultats nous montrent que la matrice d'identité qui pénalise toute 
+substitution n'est pas une altérnative viable, au moins en termes de score.
+Ceci est assez logique, et dès l'alignement avec les paramètres par défaut nous 
+avons observé qu'il n'y avait pas beaucoup de consensus majoritaires ni identités.
+PAM et BLOSSUM montrent des résultats assez intéressants. On voit sur les deux
+analyses qu'une pénalité plus faible pour l'ouverture des gaps et une plus forte
+pour l'extension donnent des résultats avec un score global qui surpasse celui
+du paramétrage par défaut.
+
+Nous pouvons donc faire une deuxième recherche, sur les régions qui présentent 
+les meilleurs scores. Nous ne calculons cette fois que pour PAM, car c'est
+la matrice qui a donné les meilleurs statistiques sur le site.
+
+## PAM2
+```{r lin.grid.search.2, message=FALSE, warning=FALSE, tidy=TRUE, cache=TRUE, results="hide"}
+my.pam.v2 <- linear.search(
+  mySeqs, substitution$PAM150, 0,
+  go = seq(5, 6, 0.10), ge = seq(1.3, 1.5, 0.020)
+)
+```
+
+```{r pam2}
+plot.align.search(my.pam.v2, "PAM GridSearch")
+head(lin.max(my.pam.v2))
+```
+\newpage
+
+## PAM3
+```{r lin.grid.search.3, message=FALSE, warning=FALSE, tidy=TRUE, cache=TRUE, results="hide"}
+my.pam.v3 <- linear.search(
+  mySeqs, substitution$PAM150, 0,
+  go = seq(4.9, 5.1, 0.005), ge = seq(1.38, 1.51, 0.0025)
+)
+```
+
+```{r pam3}
+plot.align.search(my.pam.v3, "PAM GridSearch")
+head(lin.max(my.pam.v3))
+```
+
+## PAM4
+```{r lin.grid.search.4, message=FALSE, warning=FALSE, tidy=TRUE, cache=TRUE, results="hide"}
+my.pam.v4 <- linear.search(
+  mySeqs, substitution$PAM150, 0,
+  go = seq(1.5, 5, 0.5), ge = seq(0.1, 1.5, 0.05)
+)
+```
+
+```{r pam4}
+plot.align.search(my.pam.v4, "PAM GridSearch")
+head(lin.max(my.pam.v4))
+```
+
+## PAM5
+```{r lin.grid.search.5, message=FALSE, warning=FALSE, tidy=TRUE, cache=TRUE, results="hide"}
+my.pam.v4 <- linear.search(
+  mySeqs, substitution$PAM150, 0,
+  go = seq(0.5, 1.5, 0.5), ge = seq(0.1, 1.5, 0.05)
+)
+```
+
+```{r pam4}
+plot.align.search(my.pam.v4, "PAM GridSearch")
+head(lin.max(my.pam.v4))
+```
+
+Nous n'observons aucun changement par rapport à la dernière recherche. 
+L'algorithme à est insensible à variations de cet ordre. Cependant, il sera
+intéressant de l'évaluer après, sur d'autres devoirs et projets.
+
+\newpage
+
+## Résultat final
+On ne trouve pas des fortes améliorations, ce qui nous montre, encore une fois
+que la recherche et analyse d'homologues nécessitent d'autres outils, notamment
+l'analyse de la structure tridimensionnelle. L'alignement multiple ne suffit pas.
+
+
+![Meilleur alignement trouvé](figures/ameliore.png)
+
