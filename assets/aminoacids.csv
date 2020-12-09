@@ -1,23 +1,23 @@
-one_letter,three_letter,name_en,molecular_weight_Da
-A,ala,alanine,89
-R,arg,arginine,174
-N,asn,asparagine,132
-D,asp,aspartic acid,133
-B,asx,asparagine or aspartic acid,133
-C,cys,cysteine,121
-Q,gln,glutamine,146
-E,glu,glutamic acid,147
-Z,glx,glutamine or glutamic acid,147
-G,gly,glycine,75
-H,his,histidine,155
-I,ile,isoleucine,131
-L,leu,leucine,131
-K,lys,lysine,146
-M,met,methionine,149
-F,phe,phenylalanine,165
-P,pro,proline,115
-S,ser,serine,105
-T,thr,threonine,119
-W,trp,tryptophan,204
-Y,tyr,tyrosine,181
-V,val,valine,117
+one_letter,three_letter,name_en,molecular_weight_Da,nonpolar,polar,basic,acidic,aromatic,positive,negative
+A,ala,alanine,89,1,0,0,0,0,0,0
+R,arg,arginine,174,0,0,1,0,0,0,1
+N,asn,asparagine,132,0,1,0,0,0,0,0
+D,asp,aspartic acid,133,0,0,0,1,0,1,0
+B,asx,asparagine or aspartic acid,133,0,1,0,1,0,1,0
+C,cys,cysteine,121,0,1,0,0,0,0,0
+Q,gln,glutamine,146,0,1,0,0,0,0,0
+E,glu,glutamic acid,147,0,0,0,1,0,1,0
+Z,glx,glutamine or glutamic acid,147,0,1,0,1,0,1,0
+G,gly,glycine,75,1,0,0,0,0,0,0
+H,his,histidine,155,0,0,1,0,0,0,0
+I,ile,isoleucine,131,1,0,0,0,0,0,0
+L,leu,leucine,131,1,0,0,0,0,0,0
+K,lys,lysine,146,0,0,1,0,0,0,1
+M,met,methionine,149,1,0,0,0,0,0,0
+F,phe,phenylalanine,165,1,0,0,0,1,0,0
+P,pro,proline,115,1,0,0,0,0,0,0
+S,ser,serine,105,0,1,0,0,0,0,0
+T,thr,threonine,119,0,1,0,0,0,0,0
+W,trp,tryptophan,204,0,1,0,0,1,0,0
+Y,tyr,tyrosine,181,0,1,0,0,1,0,0
+V,val,valine,117,1,0,0,0,0,0,0
