@@ -1,6 +1,9 @@
 
 # Mutiple alignment toolkit
 
+library(doParallel)
+library(foreach)
+
 f.algin.score <- function(
   seqs, go="default", ge="default", 
   subm="default", gapval=0
@@ -34,6 +37,30 @@ linear.search <- function(
   }
   return(retval)
 }
+
+parallel.search <- function(
+  seqs, subm, gapval, 
+  go = seq(5, 15, 1), ge = seq(0.1, 1.5, 0.05), 
+  nthreads=(detectCores()/2)
+){
+  cl <- parallel::makeCluster(nthreads, type = "FORK")
+  doParallel::registerDoParallel(cl)
+  
+  #nreps <- length(ge) * length(go)
+  #i.seqs <- iter(replicate(nreps, seqs, simplify = FALSE))
+  grid.eval <- foreach(g_op = go, .combine = rbind) %dopar% {
+    foreach(g_ext = ge, .combine = rbind) %dopar% {
+      it.algn.score <- f.algin.score(
+        seqs, g_op, g_ext, subm, gapval
+      )
+      #data.frame(gop = g_op, gext = g_ext)
+      data.frame(gop = g_op, gext = g_ext, score = it.algn.score)
+    }
+  }
+  stopCluster(cl) 
+  return(grid.eval)
+}
+
 
 lin.max.score <- function(x){ x[x$score == max(x$score), ] }
 lin.min.score <- function(x){ x[x$score == min(x$score), ] }

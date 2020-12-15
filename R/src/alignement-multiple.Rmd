@@ -47,17 +47,17 @@ taxo.fasta <- Biostrings::readAAStringSet(glue::glue("{config$data$taxo}/the-seq
 ```
 
 
-```{r search, cache=TRUE, eval=FALSE, echo=FALSE}
-#w.search.default.pam150 <- linear.search(
-#  taxo.fasta, subm=substitution$PAM150, 
-#  gapval=0, # How to penalise for gaps when computing the score.
-#  go = seq(5, 15, 1), # interval for gap Opening penalties
-#  ge = seq(0.1, 1.5, 0.1) # ibidem for gap extension
-#)
+```{r search, cache=TRUE}
+w.search.default.pam150 <- linear.search(
+  taxo.fasta, subm=substitution$PAM150, 
+  gapval=0, # How to penalise for gaps when computing the score.
+  go = seq(5, 15, 1), # interval for gap Opening penalties
+  ge = seq(0.1, 1.5, 0.1) # ibidem for gap extension
+)
 ```
 
 ```{r plot.bloss30}
-
+load("gscv-bloss-30-45-60.RData")
 plot.align.search(w.search.bloss30, ttl = "BLOSSUM 30")
 lin.max.score(w.search.bloss30)
 ```
@@ -68,7 +68,10 @@ plot.align.search(w.search.bloss45, ttl = "BLOSSUM 45")
 lin.max.score(w.search.bloss45)
 ```
 
-
+```{r plot.bloss60}
+plot.align.search(w.search.bloss60, ttl = "BLOSSUM 60")
+lin.max.score(w.search.bloss60)
+```
 
 
 
