@@ -1,4 +1,6 @@
 
+annotathon/embl
+
 # This should be built-in, why isn't it git ?
 .*.swp
 
