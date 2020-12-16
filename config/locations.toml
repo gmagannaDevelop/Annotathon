@@ -1,0 +1,8 @@
+
+[locations]
+default=  "../data/homologues-par-blast/default-nr"
+cinqk=    "../data/homologues-par-blast/5k-nr"
+landmark= "../data/homologues-par-blast/landmark-noexclude"
+sp=       "../data/homologues-par-blast/swissprot"
+anthony=  "../data/anthony/"
+
