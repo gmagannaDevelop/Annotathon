@@ -206,8 +206,9 @@ vignettes/*.pdf
 .httr-oauth
 
 # knitr and R markdown default cache directories
-*_cache/
-/cache/
+**/src/*_cache/
+**/src/*_files/
+#/cache/
 
 # Temporary files created by R markdown
 *.utf8.md
@@ -215,3 +216,9 @@ vignettes/*.pdf
 
 # R Environment Variables
 .Renviron
+
+**/src/*.pdf
+
+# Temporary alignment files created by msa::clustalw :
+R/**/*.aln
+R/**/*.dnd
