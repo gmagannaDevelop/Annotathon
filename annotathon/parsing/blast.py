@@ -12,6 +12,8 @@ def parse_alignment_descriptions(handle: str) -> pd.DataFrame:
     rows.loc[:, "Accession"] = rows["Accession"].apply(
         lambda x: x.split(",")[1].replace(")", "").replace('"', "")
     )
-    rows.loc[:, "Query Cover"] = rows["Query Cover"].apply(lambda x: x.replace("%", "")).astype(float)
+    rows.loc[:, "Query Cover"] = (
+        rows["Query Cover"].apply(lambda x: x.replace("%", "")).astype(float)
+    )
 
     return rows
