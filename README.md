@@ -20,13 +20,26 @@ __This document, and most of the project will be documented in a bilingually, bo
 
 
 
+## Python tools
+
+We have developed a series of tools to facilitate the otherwise cumbersome process of manually fetching sequences, sorting accoding to different criteria, etc.
+
+
+
+If you want to install it, you can directly download the tarball found in `dist` :
+
+```bash
+cd dist/
+pip install annotathon-0.1.0.tar.gz
+```
+
+Afterwards, look at `workflow/` for examples.
+
 ## R support
 
 We decided to add a directory `R/` to leverage BioConductor's wonderfull tools. 
 
 This includes a [customised version](https://github.com/gmagannaDevelop/msa-mod)  of the package `msa` to perform Multiple Sequence Alignment, using parallel processing to optimise gap parameters.
-
-
 
 ## Extra :
 
